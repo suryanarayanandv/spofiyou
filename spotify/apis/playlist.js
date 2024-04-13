@@ -12,7 +12,7 @@ const getPlaylist = async (playlistId, token) => {
 }
 
 // Get playlist tracks
-const getPlaylistTracks = async (playlistId, token) => {
+const getSpotifyPlaylistTracks = async (playlistId, token) => {
     const response = await axios.get(`${SPOTIFY_API}/playlists/${playlistId}/tracks`, {
         headers: {
             'Authorization': `Bearer ${token}`
@@ -29,7 +29,7 @@ const getPlaylistTracks = async (playlistId, token) => {
  * @param {string} token 
  * @returns string
  */
-const addTracksToPlaylist = async (playlistId, tracks, token) => {
+const addMusicToSpotifyPlaylist = async (playlistId, tracks, token) => {
     const response = await axios.post(`${SPOTIFY_API}/playlists/${playlistId}/tracks`, {
         uris: tracks
     }, {

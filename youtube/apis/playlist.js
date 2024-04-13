@@ -6,7 +6,7 @@ async function getCurrentYoutubeUserPlaylists(token) {
     params: {
       part: 'snippet',
       mine: true
-    }}, {
+      },
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -20,7 +20,7 @@ async function getYoutubePlaylistItems(playlistId, token) {
     params: {
       part: 'snippet',
       playlistId: playlistId
-    }}, {
+      },
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -34,15 +34,19 @@ async function createYoutubePlaylist(title, token) {
     snippet: {
       title: title,
       description: 'Created with Spofiyou'
-    }}, 
-    {
-      headers: {
-        Authorization: `Bearer ${token}`
-      },
-      params: {
-        part: 'snippet'
-      }
-    });
+    },
+    status: {
+      privacyStatus: 'private'
+    }
+  }, 
+  {
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+    params: {
+      part: 'snippet,status'
+    }
+  });
   return res.data;
 }
 

@@ -1,6 +1,6 @@
 // Search for a track
-const searchTrack = async (query, token) => {
-    const response = await axios.get(`${SPOTIFY_API}/search?q=${query}&type=track`, {
+const searchSpotifyTrack = async (query, token) => {
+    const response = await axios.get(`${SPOTIFY_API}/search?q=${query.name}&type=track`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -9,7 +9,7 @@ const searchTrack = async (query, token) => {
 }
 
 const searchTrackWithArtist = async (query, token) => {
-    const response = await axios.get(`${SPOTIFY_API}/search?q=${query}&type=track`, {
+    const response = await axios.get(`${SPOTIFY_API}/search?q=${query.name + ' ' + query.artist}&type=track`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -27,4 +27,5 @@ const searchTrackWithArtist = async (query, token) => {
         }
         result.push(trackInfo);
     }
+    return result;
 }

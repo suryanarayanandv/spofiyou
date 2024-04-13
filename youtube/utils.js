@@ -9,11 +9,12 @@ const addPlaylistTracksToSpotify = async (youtubePlaylistObject) => {
     var currentSpotifyUser = await getCurrentUserProfile(localStorage.getItem('spotify_access_token'));
 
     // Get youtube playlist tracks
-    getPlaylistTracks(playlistId, localStorage.getItem('youtube_accessToken')).then(async (data) => {
+    getYoutubePlaylistItems(playlistId, localStorage.getItem('youtube_accessToken')).then(async (data) => {
         var tracks = data.map(track => {
             return {
-                name: track.snippet.title,
-                artist: track.snippet.channelTitle
+                //trim the song name with 16 characters
+                //TODO: how can i find artist name from youtube? complex
+                name: track.snippet.title.length > 16 ? track.snippet.title.substring(0, 16) : track.snippet.title,
             };
         });
 
@@ -28,7 +29,7 @@ const addPlaylistTracksToSpotify = async (youtubePlaylistObject) => {
         createSpotifyPlaylist(currentSpotifyUser.id, playlistName, localStorage.getItem('spotify_access_token')).then(async (data) => {
             console.log(data);
             var spotifyPlaylist = data;
-            
+            var musicIdList = [];
             for (const track of tracks) {
                 try {
                     if (!track.name) {
@@ -37,20 +38,24 @@ const addPlaylistTracksToSpotify = async (youtubePlaylistObject) => {
                     if (track.artist === 'null' || track.artist === undefined) {
                         track.artist = '';
                     }
-                    const searchResponse = await searchSpotifyMusic(track, localStorage.getItem('spotify_access_token'));
+                    const searchResponse = await searchSpotifyTrack(track, localStorage.getItem('spotify_access_token'));
                     if (searchResponse.length === 0) {
                         console.log('No music found');
                         continue;
                     }
         
-                    const musicId = searchResponse[0].id;
+                    const musicId = searchResponse[0].uri;
                     console.log(musicId);
-                    const addResponse = await addMusicToSpotifyPlaylist(spotifyPlaylist.id, musicId, localStorage.getItem('spotify_access_token'));
-                    console.log(addResponse);
+                    musicIdList.push(musicId);
                 } catch (error) {
                     console.error('Error adding music to playlist', error);
                 }
             }
+            if (musicIdList.length === 0) {
+                return;
+            }
+            console.log(spotifyPlaylist, musicIdList);
+            await addMusicToSpotifyPlaylist(spotifyPlaylist.id, musicIdList, localStorage.getItem('spotify_access_token'));
         }).catch((error) => {
             if (error.response.status === 401) {
                 localStorage.removeItem('spotify_access_token');
