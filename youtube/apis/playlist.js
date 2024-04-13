@@ -1,62 +1,68 @@
-const axios = require('axios');
-
 const YOUTUBE_API = "https://www.googleapis.com/youtube/v3";
 
 // Get user playlist
-async function getCurrentUserPlaylists() {
+async function getCurrentYoutubeUserPlaylists(token) {
   const res = await axios.get(`${YOUTUBE_API}/playlists`, {
     params: {
       part: 'snippet',
       mine: true
-    },
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('youtube_accessToken')}`
-    }
-  });
+    }}, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
   return res.data.items;
 }
 
 // Get playlist items
-async function getPlaylistItems(playlistId) {
+async function getYoutubePlaylistItems(playlistId, token) {
   const res = await axios.get(`${YOUTUBE_API}/playlistItems`, {
     params: {
       part: 'snippet',
       playlistId: playlistId
-    },
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('youtube_accessToken')}`
-    }
-  });
+    }}, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
   return res.data.items;
 }
 
 // Create playlist
-async function createPlaylist(title) {
+async function createYoutubePlaylist(title, token) {
   const res = await axios.post(`${YOUTUBE_API}/playlists`, {
     snippet: {
       title: title,
       description: 'Created with Spofiyou'
-    },
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('youtube_accessToken')}`
-    }
-  });
+    }}, 
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      params: {
+        part: 'snippet'
+      }
+    });
   return res.data;
 }
 
 // Add music to playlist
-async function addMusicToPlaylist(playlistId, musicId) {
+async function addMusicToYoutubePlaylist(playlistId, musicId, token) {
   const res = await axios.post(`${YOUTUBE_API}/playlistItems`, {
     snippet: {
-      playlistId: playlistId,
       resourceId: {
         kind: 'youtube#video',
         videoId: musicId
+      },
+      playlistId: playlistId
+    }},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      params: {
+        part: 'snippet'
       }
-    },
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('youtube_accessToken')}`
-    }
-  });
+    });
   return res.data;
 }

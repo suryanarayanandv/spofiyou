@@ -51,7 +51,7 @@ const getUserPlaylists = async (userId, token) => {
     return response.data.items;
 }
 
-const createPlaylist = async (userId, name, token) => {
+const createSpotifyPlaylist = async (userId, name, token) => {
     const response = await axios.post(`${SPOTIFY_API}/users/${userId}/playlists`, {
         name: name,
         description: "Created by Spotify API",
@@ -64,3 +64,11 @@ const createPlaylist = async (userId, name, token) => {
     return response.data;
 }
 
+const getCurrentUserPlaylists = async (token) => {
+    const response = await axios.get(`${SPOTIFY_API}/me/playlists`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+    return response.data.items;
+}

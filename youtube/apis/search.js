@@ -1,18 +1,14 @@
-const axios = require('axios');
-
-const YOUTUBE_API = "https://www.googleapis.com/youtube/v3";
-
 // Search for a music
-async function searchMusic(query) {
+async function searchYoutubeMusic(query, token) {
   const res = await axios.get(`${YOUTUBE_API}/search`, {
     params: {
       part: 'snippet',
-      q: query,
+      q: `${query.name} ${query.artist}`,
       type: 'video',
       maxResults: 10
     },
     headers: {
-      Authorization: `Bearer ${process.env.YOUTUBE_ACCESS_TOKEN}`
+      Authorization: `Bearer ${token}`
     }
   });
   return res.data.items;
