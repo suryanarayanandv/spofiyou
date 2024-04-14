@@ -1,0 +1,35 @@
+{
+  "name": "spofiyou",
+  "version": "1.0.0",
+  "description": "spotify youtube synchronize",
+  "main": "app/app.js",
+  "module": "commonjs",
+  "scripts": {
+    "start": "node youtube/oauth2.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suryanarayanandv/spofiyou.git"
+  },
+  "keywords": [
+    "spofiyou"
+  ],
+  "author": "suryanarayanandv",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/suryanarayanandv/spofiyou/issues"
+  },
+  "homepage": "https://github.com/suryanarayanandv/spofiyou#readme",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
+    "fs": "^0.0.1-security",
+    "googleapis": "^134.0.0",
+    "nodemon": "^3.1.0",
+    "open": "^10.1.0",
+    "path": "^0.12.7",
+    "server-destroy": "^1.0.1",
+    "url": "^0.11.3"
+  }
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Auth Spofiyou</title>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+</head>
+<body>
+    <div id="g_id_onload" data-client_id="274116260879-7u30j51cd2ubqeahfjb3urjedbha262b.apps.googleusercontent.com"
+        data-auto_prompt="false">
+    </div>
+    <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with"
+        data-shape="rectangular" data-logo_alignment="left">
+    </div>
+    <script>
+        window.onload = function () {
+            const googleButton = document.querySelector('.g_id_signin');
+            googleButton.addEventListener('click', function () {
+                const auth = google.accounts.id.initialize({
+                    client_id: "274116260879-7u30j51cd2ubqeahfjb3urjedbha262b.apps.googleusercontent.com",
+                    callback: function (response) {
+                        // Use auth object to call API
+
+                        // Example: Get user profile
+                        const profile = auth.currentUser.get().getBasicProfile();
+                        console.log(profile.getName());
+                        console.log(profile.getEmail());
+                        console.log(profile.getImageUrl());
+                    }
+                });
+                google.accounts.id.prompt();
+            });
+        }
+    </script>
+</body>
+
+</html>
