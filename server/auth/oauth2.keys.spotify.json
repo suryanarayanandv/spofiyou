@@ -1,0 +1,9 @@
+{
+    "web": {
+        "client_id": "cf243a9f33d744419f1e0369d1a690b5",
+        "client_secret": "2cfc7ae017ac4b66984a9d7bfa9fcfad",
+        "redirect_uris": [
+            "http://localhost:5500/auth/spotify/callback"
+        ]
+    }
+}

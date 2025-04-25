@@ -1,0 +1,9 @@
+{
+    "web": {
+        "client_id": "",
+        "client_secret": "",
+        "redirect_uris": [
+            "http://localhost:5500/auth/google/callback"
+        ]
+    }
+}

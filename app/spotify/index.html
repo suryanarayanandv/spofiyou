@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spofiyou</title>
+
+  <!-- Styles: Spotify Green & Dark Theme -->
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #FFFFFF;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      background-color: #1DB954;
+      padding: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .header img {
+      height: 40px;
+      margin-right: 1rem;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #000;
+    }
+
+    .spotify {
+      padding: 2rem;
+    }
+
+    #user-profile {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    #playlist-list {
+      background-color: #282828;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    #playlist-list::before {
+      content: "🎧 ";
+      font-size: 1.2rem;
+    }
+  </style>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/SpofiYou/spotify/apis/playlist.js"></script>
+  <script src="/SpofiYou/spotify/apis/search.js"></script>
+  <script src="/SpofiYou/spotify/apis/user.js"></script>
+  <script src="/SpofiYou/spotify/utils.js"></script>
+  <script src="/SpofiYou/youtube/apis/playlist.js"></script>
+  <script src="/SpofiYou/youtube/apis/search.js"></script>
+</head>
+<body>
+  <div class="header">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify Logo">
+    <h1>Spofiyou</h1>
+  </div>
+
+  <div class="spotify">
+    <div id="user-profile">
+      <!-- User info will load here -->
+    </div>
+    <div id="playlist-list">
+      Your playlists:
+    </div>
+  </div>
+
+  <script src="./spotifyToYoutube.js"></script>
+</body>
+</html>
